@@ -6,8 +6,6 @@ License:        LGPLv2+
 URL:            https://github.com/AbiWord/enchant
 Source0:        https://github.com/AbiWord/enchant/releases/download/v%{version}/enchant-%{version}.tar.gz
 
-Patch0000:      enchant_aspell.patch
-
 BuildRequires:  automake autoconf libtool gcc-c++ glib2-devel aspell-devel hunspell-devel libvoikko-devel
 
 Provides:       bundled(gnulib) %{name}-aspell = %{version}-%{release} %{name}-voikko = %{version}-%{release}
