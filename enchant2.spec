@@ -1,12 +1,10 @@
 Name:           enchant2
 Version:        2.2.3
-Release:        6
+Release:        7
 Summary:        Generic spell checking library
 License:        LGPLv2+
 URL:            https://github.com/AbiWord/enchant
 Source0:        https://github.com/AbiWord/enchant/releases/download/v%{version}/enchant-%{version}.tar.gz
-
-Patch0000:      enchant_aspell.patch
 
 BuildRequires:  automake autoconf libtool gcc-c++ glib2-devel aspell-devel hunspell-devel libvoikko-devel
 
@@ -72,5 +70,11 @@ sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g;
 %{_mandir}/man1/*
 
 %changelog
+* Sun Jan 19 2020 wutao <wutao61@huawei.com> - 2.2.3-7
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC: modify spec
+
 * Mon Nov 04 2019 huzhiyu <huzhiyu1@huawei.com> - 2.2.3-6
 - Package init
