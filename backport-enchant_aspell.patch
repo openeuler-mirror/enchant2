@@ -1,0 +1,44 @@
+Reference: https://bugzilla.redhat.com/show_bug.cgi?id=1574893
+Conflict: NA
+
+---
+ configure.ac          | 2 +-
+ providers/Makefile.am | 1 +
+ tests/test.pwl.orig   | 2 --
+ 3 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 4877edc..eda506e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -210,7 +210,7 @@ build_providers=
+ dnl Standard providers
+ ENCHANT_CHECK_PKG_CONFIG_PROVIDER([hunspell], [HUNSPELL])
+ ENCHANT_CHECK_PKG_CONFIG_PROVIDER([nuspell], [NUSPELL], [nuspell >= 4.1.0])
+-ENCHANT_CHECK_LIB_PROVIDER([aspell], [ASPELL], [get_aspell_dict_info_list])
++ENCHANT_CHECK_PKG_CONFIG_PROVIDER([aspell], [ASPELL])
+ ENCHANT_CHECK_LIB_PROVIDER([hspell], [HSPELL], [hspell_get_dictionary_path],, [-lz])
+ ENCHANT_CHECK_PKG_CONFIG_PROVIDER([voikko], [VOIKKO], [libvoikko])
+ dnl FIXME: The test below assumes GCC(-compatible) ObjC++ compiler, but
+diff --git a/providers/Makefile.am b/providers/Makefile.am
+index 8571dcc..4ba8a94 100644
+--- a/providers/Makefile.am
++++ b/providers/Makefile.am
+@@ -12,6 +12,7 @@ AM_LDFLAGS = -module -avoid-version -no-undefined $(ENCHANT_LIBS) $(top_builddir
+ if WITH_ASPELL
+ provider_LTLIBRARIES += enchant_aspell.la
+ endif
++enchant_aspell_la_LIBADD = $(ASPELL_LIBS)
+ 
+ if WITH_HSPELL
+ provider_LTLIBRARIES += enchant_hspell.la
+diff --git a/tests/test.pwl.orig b/tests/test.pwl.orig
+index c6089a7..e69de29 100644
+--- a/tests/test.pwl.orig
++++ b/tests/test.pwl.orig
+@@ -1,2 +0,0 @@
+-hello
+-tag
+-- 
+2.23.0
+

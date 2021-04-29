@@ -1,15 +1,15 @@
 Name:           enchant2
 Version:        2.2.15
-Release:        1
+Release:        2
 Summary:        Generic spell checking library
 License:        LGPLv2+
 URL:            https://github.com/AbiWord/enchant
 Source0:        https://github.com/AbiWord/enchant/releases/download/v%{version}/enchant-%{version}.tar.gz
+Patch6000:      backport-enchant_aspell.patch
 
 BuildRequires:  automake autoconf libtool gcc-c++ glib2-devel aspell-devel hunspell-devel libvoikko-devel
 
-Provides:       bundled(gnulib) %{name}-aspell = %{version}-%{release} %{name}-voikko = %{version}-%{release}
-Obsoletes:      %{name}-aspell < %{version}-%{release} %{name}-voikko < %{version}-%{release}
+Provides:       bundled(gnulib)
 
 %description
 Enchant aims to provide a simple but comprehensive abstraction for dealing
@@ -25,6 +25,24 @@ Requires:       %{name} = %{version}-%{release} glib2-devel
 %description devel
 This package contains some libraries and header files for
 development of %{name}.
+
+%package        aspell
+Summary:        Aspell is integrated for libenchant
+Requires:       %{name} = %{version}-%{release}
+Provides:       %{name}-aspell = %{version}-%{release}
+Obsoletes:      %{name}-aspell < %{version}-%{release}
+
+%description    aspell
+Applications need libraries integrated by using libenchant with aspell.
+
+%package        voikko
+Summary:        voikko is integrated for libenchant
+Requires:       %{name} = %{version}-%{release}
+Provides:       %{name}-voikko = %{version}-%{release}
+Obsoletes:      %{name}-voikko < %{version}-%{release}
+
+%description    voikko
+Applications need libraries integrated by using libenchant with voikko.
 
 %package help
 Summary:        Help package for %{name}
@@ -58,8 +76,14 @@ sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g;
 %license COPYING.LIB
 %{_bindir}/{enchant-2,enchant-lsmod-2}
 %{_libdir}/libenchant-2.so.*
-%{_libdir}/enchant-2/*
+%{_libdir}/enchant-2/enchant_hunspell.so
 %{_datadir}/enchant-2
+
+%files aspell
+%{_libdir}/enchant-2/enchant_aspell.so*
+
+%files voikko
+%{_libdir}/enchant-2/enchant_voikko.so*
 
 %files devel
 %{_libdir}/libenchant-2.so
@@ -70,6 +94,12 @@ sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g;
 %{_mandir}/man1/*
 
 %changelog
+* Thu Apr 29 2021 zhaoyuxing <zhaoyuxing2@huawei.com> - 2.2.15-2
+- Type:bugfix
+- CVE:NA
+- SUG:NA
+- DESC: split aspell and voikko subpackage & backport patch that enchant2 use hunspell
+
 * Mon Feb 1 2021 chengguipeng1 <chengguipeng1@huawei.com> - 2.2.15-1
 - DESC: update to 2.2.15
 
