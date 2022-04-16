@@ -1,6 +1,6 @@
 Name:           enchant2
-Version:        2.2.15
-Release:        2
+Version:        2.3.2
+Release:        1
 Summary:        Generic spell checking library
 License:        LGPLv2+
 URL:            https://github.com/AbiWord/enchant
@@ -94,6 +94,9 @@ sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g;
 %{_mandir}/man1/*
 
 %changelog
+* Fri Apr 1 2022 YukariChiba <i@0x7f.cc> - 2.3.2-1
+- Upgrade version to 2.3.2
+
 * Thu Apr 29 2021 zhaoyuxing <zhaoyuxing2@huawei.com> - 2.2.15-2
 - Type:bugfix
 - CVE:NA
